@@ -1,6 +1,7 @@
-from app_blog import db,bcrypt
+from app_blog import db,bcrypt,login
+from flask_login import UserMixin
 
-class Users(db.Model):
+class Users(UserMixin,db.Model):
     id=db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(80),unique=True,nullable=False)
     email=db.Column(db.String(80),unique=True,nullable=False)
@@ -21,3 +22,7 @@ class Users(db.Model):
         
     def __repr__(self):
         return "username:%s, email:%s"%(self.username,self.email)
+
+@login.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))

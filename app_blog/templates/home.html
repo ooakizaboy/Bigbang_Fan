@@ -10,7 +10,7 @@
 
     <body>
       <!-- start of navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#"></a>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCz2U0AI0Z70gO2VY_LR5YbV2TRuEPX5I-bg&usqp=CAU" alt="bigbang_logo" height="50"/>
         </a>
@@ -21,28 +21,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item actve">
-              <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url_for('artist.home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('member') }}">Member</a>
+              <a class="nav-link" href="{{ url_for('artist.member') }}">Member</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('album') }}">Album</a>
+              <a class="nav-link" href="{{ url_for('artist.album') }}">Album</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('artist.logout') }}">Logout</a>
             </li>
         
             
           </ul>
         </div>
       </nav>
-      <!-- end of navbar --> 
-
-      <!-- start of container -->
+      <!-- end of navbar  
+      start of container -->
       <div class="container">
         <!-- Row with collapsible content -->
         <div class="row">
           <div class="col text-center">
             <a aria-expanded="false" aria-controls="seedSpecial" data-toggle="collapse" href="#seedSpecial">
-              How are U?
+              How are U,{{current_user.username}}?
             </a>
             <p class="collapse" id="seedSpecial">This is home
             </p>
@@ -104,10 +106,12 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-   
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+      
+        
     </body>
 
 </html>

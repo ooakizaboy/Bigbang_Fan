@@ -1,9 +1,8 @@
 from ast import Pass
-from django.forms import ValidationError
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,validators,PasswordField
+from wtforms import StringField,SubmitField,validators,PasswordField,BooleanField,ValidationError
 from wtforms.fields.html5 import EmailField
-from app_blog.model import Users
+from app_blog.artist.model import Users
 
 class FormRegister(FlaskForm):
     username=StringField('Username',validators=[
@@ -26,7 +25,7 @@ class FormRegister(FlaskForm):
     password2=PasswordField('Confirm password',validators=[
         validators.DataRequired()
     ])
-
+    
     submit=SubmitField('Register New Account')
 
     def validate_email(self,field):
@@ -35,3 +34,19 @@ class FormRegister(FlaskForm):
     def validate_username(self,field):
         if Users.query.filter_by(username=field.data).first():
             raise ValidationError('Username Already Registered By Somebody')
+
+class FormLogin(FlaskForm):
+    email=EmailField('Email',validators=[
+        validators.DataRequired(),
+        validators.Length(5,30),
+        validators.Email()
+    ])
+
+    password=PasswordField('Password',validators=[
+        validators.DataRequired()
+    ])
+
+    remember_me = BooleanField('keep logged in')
+
+    submit=SubmitField('Log in')
+
