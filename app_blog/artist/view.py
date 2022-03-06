@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import artist
+from app_blog.main import main
 from app_blog import app
 from app_blog import db
 from flask import render_template,flash,redirect,url_for,request
@@ -8,7 +9,7 @@ from app_blog.artist.form import FormRegister,FormLogin
 from flask_login import login_user,current_user,login_required,logout_user
 
 db.create_all()
-@app.route('/')
+@artist.route('/')
 def index():
     return render_template('index.html')
 
@@ -25,7 +26,7 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        return render_template('home.html',user=user)
+        return render_template('login.html',user=current_user)
     return render_template('register.html',form=form)
 
 @artist.route('/home')

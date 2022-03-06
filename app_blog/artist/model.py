@@ -1,11 +1,18 @@
 from app_blog import db,bcrypt,login
 from flask_login import UserMixin
+from datetime import datetime
 
 class Users(UserMixin,db.Model):
     id=db.Column(db.Integer,primary_key=True)
     username=db.Column(db.String(80),unique=True,nullable=False)
     email=db.Column(db.String(80),unique=True,nullable=False)
     password_hash=db.Column(db.String(50),nullable=False)
+    about_me=db.Column(db.Text())
+    location=db.Column(db.String(20))
+    gender = db.Column(db.String(20))
+    regist_date=db.Column(db.DateTime(),default=datetime.utcnow())
+    last_login=db.Column(db.DateTime(),default=datetime.utcnow())
+    blog_mains=db.relationship('Blog_Main',backref='user',lazy='dynamic')
     
 
     @property
