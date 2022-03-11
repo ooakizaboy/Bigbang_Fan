@@ -14,7 +14,7 @@ class FormUserInfo(FlaskForm):
     ],choices=[('F','Female'),('M','Man')])
     submit=SubmitField('Submit UserInfo')
 
-    def __init__(self):
-        super(FormUserInfo,self).__init__()
-        self.gender.choices=[('A','A'),('B','B')]
+    # def __init__(self):
+    #     super(FormUserInfo,self).__init__()
+    #     self.gender.choices=[('A','A'),('B','B')]
 

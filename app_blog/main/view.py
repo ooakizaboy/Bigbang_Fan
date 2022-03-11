@@ -23,13 +23,13 @@ def edituserinfo():
         current_user.location=form.location.data
         current_user.gender=form.gender.data
         db.session.add(current_user)
-        db.sesssion.commit()
+        db.session.commit()
         flash('You Have Already Edit Your Info')
         return redirect(url_for('main.userinfo',username=current_user.username))
     form.about_me.data=current_user.about_me
     form.location.data=current_user.location
     form.gender.data=current_user.gender
-    return render_template('editUserInfo.html',form=form)
+    return render_template('main/editUserInfo.html',form=form)
 
 @main.route('/userinfo/<username>')
 @login_required
@@ -37,5 +37,5 @@ def userinfo(username):
     user=Users.query.filter_by(username=username).first()
     if user is None:
         abort(404)
-    return render_template('UserInfo.html',user=user)
+    return render_template('main/userinfo.html',user=user)
 

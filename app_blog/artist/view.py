@@ -26,8 +26,8 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        return render_template('login.html',user=current_user)
-    return render_template('register.html',form=form)
+        return render_template('home.html',user=user)
+    return render_template('register.html', form = form)
 
 @artist.route('/home')
 @login_required
@@ -45,7 +45,7 @@ def login():
                 next=request.args.get('next')
                 if not next_is_valid(next):
                     return 'bad'
-                return redirect(next or url_for('artist.home',user=current_user.username))
+                return redirect(next or url_for('artist.home'))
             else:
                 flash("worng email or password")
         else:
@@ -73,7 +73,10 @@ def album():
 def test():
     return render_template('base.html')
 
-
+# @app.route('/userinfo')  
+# def userinfo():  
+#     return render_template('main/userinfo.html')
+    
 def next_is_valid(url):
     """
     為了避免被重新定向的url攻擊，必需先確認該名使用者是否有相關的權限，
