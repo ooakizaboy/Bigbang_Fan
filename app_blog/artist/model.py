@@ -13,7 +13,7 @@ class Users(UserMixin,db.Model):
     regist_date=db.Column(db.DateTime(),default=datetime.utcnow())
     last_login=db.Column(db.DateTime(),default=datetime.utcnow())
     blog_mains=db.relationship('Blog_Main',backref='user',lazy='dynamic')
-    
+    blog_posts=db.relationship('Blog_Post',backref='user',lazy='dynamic')
 
     @property
     def password(self):

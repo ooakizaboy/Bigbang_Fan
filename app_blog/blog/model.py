@@ -16,13 +16,15 @@ class Blog_Main(db.Model):
     blog_create_date=db.Column(db.DateTime,default=datetime.utcnow)
     artist=db.Column(db.Integer,db.ForeignKey('users.id'))
     posts = db.relationship('Blog_Post', backref='blogs', lazy='dynamic')
+    blog_cover_url = db.Column(db.String(50))
     
 
 
-    def __init__(self,blog_name,blog_descri,artist):
+    def __init__(self,blog_name,blog_descri,artist,blog_cover_url):
         self.blog_name=blog_name
         self.blog_descri=blog_descri
         self.artist=artist
+        self.blog_cover_url=blog_cover_url
 
     def __repr__(self):
         return '<blog>:%s, <artist>:%s' %(self.blog_name,self.artist)
