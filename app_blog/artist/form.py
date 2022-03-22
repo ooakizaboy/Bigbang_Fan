@@ -1,4 +1,6 @@
 from ast import Pass
+from email.mime import message
+from pickle import TRUE
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,validators,PasswordField,BooleanField,ValidationError
 from wtforms.fields.html5 import EmailField
@@ -49,4 +51,27 @@ class FormLogin(FlaskForm):
     remember_me = BooleanField('keep logged in')
 
     submit=SubmitField('Log in')
+
+class FormFunc(FlaskForm):
+    func_module_name=StringField('func_module_name',validators=[
+        validators.DataRequired(),
+        validators.Length(max=50,message='Max Length equal 50')
+    ])
+    func_description=StringField('func_dexcription',validators=[
+        validators.DataRequired(),
+        validators.Length(max=100,message='Max Length equal 100')
+    ])
+    func_is_activate = BooleanField('is_activate', validators=[validators.DataRequired(), ],default=True)
+    func_remark=StringField('func_remark',validators=[
+        validators.DataRequired(),
+        validators.Length(max=100,message='Max Length equal 100')
+    ])
+    submit=SubmitField('Add New View Function')
+
+class FormRole(FlaskForm):
+    name=StringField('role_name',validators=[
+        validators.DataRequired(),
+        validators.Length(max=50,message='Max Length equal 50')
+    ])
+    submit=SubmitField('Add New Role')
 

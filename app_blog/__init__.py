@@ -1,5 +1,6 @@
+from urllib import request
 import bcrypt
-from flask import Flask,render_template
+from flask import Flask,render_template,g,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os
@@ -8,8 +9,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-
-
+from flask_babel import Babel,lazy_gettext, gettext, ngettext, refresh
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
@@ -19,18 +19,12 @@ bootstrap=Bootstrap(app)
 db=SQLAlchemy(app)
 bcrypt=Bcrypt(app)
 migrate = Migrate(app, db)
+babel=Babel(app)
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-UPLOAD_FOLDER ='D:\trianning\Bigbang_Fan\app_blog\static\image_folder'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 login=LoginManager(app)
 login.login_view='artist.login'
-
-
 
 from app_blog.artist import artist
 app.register_blueprint(artist, url_prefix='/artist')

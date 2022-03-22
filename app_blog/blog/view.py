@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from tkinter.tix import Form
 from flask import render_template,flash,redirect,url_for
+from app_blog.decorator_permission import decorator_permission
 from app_blog.artist.model import Users
 from app_blog import artist
 from app_blog.blog.form import Form_Blog_Main
@@ -12,7 +13,6 @@ from .import blog
 from app_blog.blog.form import Form_Blog_Main,Form_Blog_Post
 from app_blog.blog.model import Blog_Main,Blog_Post
 from slugify import slugify
-from .. import allowed_file
 import time
 import hashlib
 from werkzeug.utils import secure_filename
@@ -77,7 +77,12 @@ def post_list(blog_id):
 
 
 @blog.route('/blog_post/r/<slug>')
+@decorator_permission
+@login_required
 def read_blog_post(slug):
+    if not current_user.check_artist('app_blog.blog.view1', 'read_blog_post'):
+        flash('You Have No Author!')
+        return redirect(url_for('main.index'))
     post=Blog_Post.query.filter_by(slug=slug).first_or_404()
     return render_template('blog/blog_post_read.html',post=post)
 
@@ -102,4 +107,40 @@ def update_blog_post(post_id):
     form.post_category.data=post.category_id
 
     return render_template('blog/blog_post_edit.html',form=form,post=post,action='edit')
-    
+
+
+@blog.route('/blog_main/u/<int:blog_id>/',methods=['GET','POST'])
+@login_required
+def update_blog_main(blog_id):
+    blog=Blog_Main.query.filter_by(id=blog_id).first_or_404()
+    form=Form_Blog_Main()
+    if form.validate_on_submit():
+        file_url=''
+        if not form.image_uploads.data and blog.blog_cover_url:
+            file_url=blog.blog_cover_url
+        if form.image_uploads.data:
+            f=form.image_uploads.data
+            file_name=secure_filename(f.filename)
+            f.save(os.path.join("D:/trianning/Bigbang_Fan/app_blog/static/image_folder", file_name))
+            file_url="/static/image_folder/"+ file_name
+        if not file_url:
+            file_url = None
+        blog.blog_name=form.blog_name.data
+        blog.blog_descri=form.blog_descri.data
+        blog.blog_cover_url=file_url
+        db.session.add(blog)
+        db.session.commit()
+        flash('Update Blog Main!')
+        return redirect(url_for('main.userinfo',username=current_user.username))
+
+    form.blog_name.data=blog.blog_name
+    form.blog_descri.data=blog.blog_descri
+    form.image_uploads=blog.blog_cover_url
+    return render_template('blog/blog_main_edit.html',form=form,action='edit')
+
+
+@blog.route('/blog_test/')
+@decorator_permission
+@login_required
+def blog_test():
+    return 'i am test route'

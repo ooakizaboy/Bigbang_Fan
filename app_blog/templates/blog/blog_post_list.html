@@ -3,9 +3,11 @@
 
 {% block page_content %}
 <h1>Post List {{blog.blog_name}}</h1>
+{% if blog.blog_cover_url %}
 <div class="post-cover">
     <img src="{{ blog.blog_cover_url }}" width="200" height="200">
-
+</div>
+{% endif %}
 <div class="post-list">
     {% for post in posts %}
     <div class="post-content">
@@ -15,4 +17,9 @@
     </div>
     {% endfor %}
 </div>
-{% endblock%}
+{% if blog.artist == current_user.id %}
+    <div class="post-artist">
+        <a href="{{ url_for('blog.update_blog_main', blog_id=blog.id) }}">Edit Your Blog Main</a>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,13 +1,28 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Blog_Main_Edit{% endblock %}
+{% block title %}
+    {% if action =='edit' %}
+        Blog_Main_Edit
+    {% else %}
+        Blog_Main_Create
+    {% endif %}
+{% endblock %}
 
 {% block page_content %}
 <div calss="page-header">
     <h1>Hello,{{current_user.username}}</h1>
-    <h2>How about to add new blog book</h2>
+    {% if action =='edit'%}
+        <h2>Edit your blog book</h2>
+    {% else %}
+        <h2>How about to add new blog book</h2>
+    {% endif %}
 </div>
+    {% if form.image_uploads and action =='edit' %}
+    <div class='page-img'>
+        <img src="{{form.image_uploads}}" width="200" height="200" alt="blog_cover">
+    </div>
+    {% endif %}
 <div class="col-md-4">
     {{wtf.quick_form(form)}}
 </div>

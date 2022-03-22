@@ -1,0 +1,15 @@
+{% macro macro_paginate(paginate_obj, endpoint) -%}
+<div class="post-paginate">
+    {% for page in paginate_obj.iter_pages() %}
+        {% if page %}
+            {% if page != paginate_obj.page %}
+                <a href="{{ url_for(endpoint,  page=page, **kwargs) }}">{{ page }}</a>
+            {% else %}
+                <strong>{{ page }}</strong>
+            {% endif %}
+        {% else %}
+            <span class=ellipsis>…</span>
+        {% endif %}
+    {% endfor %}
+<div>
+{%- endmacro %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Read View Function{% endblock %}
+{% block page_content %}
+<div class="page-header">
+    <h1>Read View Function</h1>
+</div>
+<div class="func-list">
+    <table class="func-list">
+        <thead>
+            <tr>
+                {% for column in columns %}
+                <th>{{column}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for func in funcs.items %}
+        <tr>
+            <td>{{func.id}}</td>
+            <td>{{func.func_module_name}}</td>
+            <td>{{func.func_desciption}}</td>
+            <td>{{func.func_is_activate}}</td>
+            <td>{{func.func_remark}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="func-paginate">
+    {% for page in funcs.iter_pages() %}
+    {% if page %}
+        {%if page !=funcs.page %}
+        <a href="{{url_for('main.view_function_r',page=page)}}">{{page}}</a>
+        {% else %}
+        <strong>{{page}}</strong>
+        {% endif %}
+    {% else %}
+         <span class=ellipsis>...</span>
+    {% endif %}
+  {% endfor %}
+</div> 
+{% endblock %}

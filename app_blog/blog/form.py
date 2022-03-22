@@ -7,7 +7,8 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 import wtforms.ext.sqlalchemy.fields as t
 from flask_wtf.file import FileRequired,FileAllowed,FileField
-from .. import allowed_file
+
+
 class Form_Blog_Main(FlaskForm):
     blog_name=StringField('Blog_Name',validators=[
         validators.DataRequired(),
