@@ -51,6 +51,20 @@ class FormLogin(FlaskForm):
     remember_me = BooleanField('keep logged in')
 
     submit=SubmitField('Log in')
+    
+class FormChangePWD(FlaskForm):
+    password_old=PasswordField('PassWord',validators=[
+        validators.DataRequired()
+    ])
+    password_new=PasswordField('PassWord',validators=[
+        validators.DataRequired(),
+        validators.Length(5,10),
+        validators.EqualTo('password_new_confirm',message='PASSWORD NEED MATCH')
+    ])
+    password_new_confirm=PasswordField('Confirm PassWord',validators=[
+        validators.DataRequired()
+    ])
+    submit=SubmitField('Change Password')
 
 class FormFunc(FlaskForm):
     func_module_name=StringField('func_module_name',validators=[

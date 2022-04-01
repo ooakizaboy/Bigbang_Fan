@@ -60,12 +60,12 @@ def post_blog_post():
             blog_main=form.post_blog.data.id,
             slug='%i-%i-%i-%i-%s' % (current_user.id, datetime.now().year, datetime.now().month, datetime.now().day,
                                   slugify(form.post_title.data))
-        )
         
+        )
         db.session.add(post)
         db.session.commit()
         flash('Blog Post Success')
-        return redirect(url_for('blog.read_blog_post',slug=post.slug))
+        return redirect(url_for('blog.read_blog_post'),slug=post.slug)
     return render_template('blog/blog_post_edit.html', form=form)
 
 

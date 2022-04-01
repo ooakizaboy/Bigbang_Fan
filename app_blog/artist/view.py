@@ -5,7 +5,7 @@ from app_blog import app
 from app_blog import db
 from flask import render_template,flash,redirect,url_for,request
 from app_blog.artist.model import Users
-from app_blog.artist.form import FormRegister,FormLogin
+from app_blog.artist.form import FormRegister,FormLogin,FormChangePWD
 from flask_login import login_user,current_user,login_required,logout_user
 
 db.create_all()
@@ -53,6 +53,13 @@ def login():
 
     return render_template('login.html',form=form)
  
+@artist.route('/changepassword',methods=['GET','POST'])
+@login_required
+def changepassword():
+    form=FormChangePWD()
+    if form.validate_on_submit():
+        return 'Change'
+    return render_template('changepassword.html',form=form)
 
 @artist.route('/logout')
 @login_required

@@ -30,9 +30,6 @@
               <a class="nav-link" href="{{ url_for('artist.album') }}">Album</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('main.userinfo',username=current_user.username) }}">UserInfo</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{{ url_for('artist.logout') }}">Logout</a>
             </li>
             {% else %}
@@ -43,6 +40,18 @@
           {% endif %}
         </div>
         </div>
+        <button class="btn btn-bd-light dropdown-toggle show" id="bd-versions" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+          <span class="d-none d-lg-inline">UserInfo</span>
+        </button>
+        <!-- <ul class="dropdown-menu dropdown-menu-end show" aria-labelledby="bd-versions" data-bs-popper="static">
+          <li><a class="nav-link" href="{{ url_for('main.userinfo',username=current_user.username) }}">UserInfo</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="https://getbootstrap.com/docs/4.6/">v4.6.x</a></li>
+          <li><a class="dropdown-item" href="https://getbootstrap.com/docs/3.4/">v3.4.1</a></li>
+          <li><a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="/docs/versions/">All versions</a></li>
+        </ul> -->
       </nav>
       {%endblock navbar%}
       {% block content %}

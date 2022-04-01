@@ -1,19 +1,14 @@
 from functools import wraps
-from django.shortcuts import redirect
 from flask_login import current_user
-from flask import flash,url_for
+from flask import flash,redirect,url_for
 
 def decorator_permission(func):
     @wraps(func)
-    def wrapper(*args,**kwargs):
-        if current_user._get_current_object().check_artist(func.__module__,func.__name__):
+    def wrapper(*args, **kwargs):
+        if current_user._get_current_object().check_artist(func.__module__, func.__name__):
             flash('Good Job')
-            return func(*args,**kwargs)
+            return func(*args, **kwargs)
         else:
-            flash('you have no artist,please fill in IT order!')
-            return redirect(url_for('main.index'))
+            flash('you have no author, please fill in IT order!')
+            return redirect(url_for('artist.home'))
     return wrapper
-
-@decorator_permission
-def test_decorator():
-    print('test')
