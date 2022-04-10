@@ -34,8 +34,10 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
               {% if current_user.is_authenticated %}
+              <a class="dropdown-item" href="{{ url_for('main.redirectuserinfo') }}">Userinfo</a>
               <a class="dropdown-item" href="{{ url_for('main.edituserinfo') }}">Edituserinfo</a>
               <a class="dropdown-item" href="{{ url_for('artist.changepassword') }}">Changepassword</a>
+              <a class="dropdown-item" href="base.html">read_blog_post</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ url_for('artist.logout') }}">Logout</a>
               {% else %}

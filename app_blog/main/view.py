@@ -35,6 +35,11 @@ def edituserinfo():
     form.gender.data=current_user.gender
     return render_template('main/editUserInfo.html',form=form)
 
+@main.route('/redirectuserinfo',methods=['GET','POST'])
+@login_required
+def redirectuserinfo():
+    return redirect(url_for('main.userinfo',username=current_user.username))
+
 @main.route('/userinfo/<username>')
 @login_required
 def userinfo(username):
