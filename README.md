@@ -1,7 +1,8 @@
 # Bigbang_Fan
 
 
-專案使用Flask架構，呈現Bigbang粉絲部落格網站  
+專案呈現Bigbang粉絲部落格網站，介紹韓國流行團體Bigbang，並結合會員功能
+可以發布屬於自己的部落格，並在其中交流分享彼此的想法，凝聚粉絲的心意
 
 # Feature
 
@@ -14,7 +15,7 @@
  
 # Use
 使用者帳號註冊、運用flask-loging實現login、logout與修改密碼功能  
-sql連動紀錄user帳號密碼與blog內容   
+SQL連動紀錄user帳號密碼與blog內容   
 粉絲團頁面展示bootstrap    
 blog展示網誌類別、網誌內文編輯更新、圖片上傳更改、更新時間   
 
