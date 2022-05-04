@@ -77,10 +77,7 @@ blog展示網誌類別、網誌內文編輯更新、圖片上傳更改、更新�
 
 
 ## V1.0.0 版本內容更新  
-1. 新功能     aaaaaaaaa
-2. 新功能     bbbbbbbbb
-3. 新功能     ccccccccc
-4. 新功能     ddddddddd
+1.  2022/04/05  角色權限管理       
 
 
 ## Authors
